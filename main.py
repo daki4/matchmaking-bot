@@ -17,7 +17,9 @@ bot = commands.Bot(prefix, intents = intents)
 # Load cogs
 initial_extensions = [
     "cogs.create_event",
-    "cogs.setup"
+    "cogs.setup",
+    # "cogs.notify",
+    # "cogs.garbage_collect"
 ]
 
 print(initial_extensions)

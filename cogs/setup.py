@@ -16,14 +16,16 @@ class Setup(commands.Cog):
     @commands.guild_only()
     @commands.has_permissions(administrator=True)
     @commands.cooldown(1, 2, commands.BucketType.member)
-    async def setup(self, ctx:commands.Context, server_invite: str=None):
+    async def setup(self, ctx:commands.Context, server_invite: str=None, role: discord.Role=None):
         if server_invite is not None:
-            db.add_guild(ctx.message.guild.id, server_invite, ctx.channel.id)
+            db.add_guild(ctx.message.guild.id, server_invite, ctx.channel.id, role.id)
         else:
             invite = await ctx.channel.create_invite(reason="This is the Stellaris Matchmaking bot discord invite. \
                 This invite was made by the bot because you did not input an invite at setup. you can redo setup with [p]delsetup and [p]setup \
                 and this time provide an invite.")
-            db.add_guild(ctx.message.guild.id, str(invite), ctx.channel.id)
+            print(f'{ctx.message.guild.id, str(invite)}    {str(ctx.channel.id)}')
+            print(role.id)
+            # db.add_guild(ctx.message.guild.id, str(invite), ctx.channel.id, role.id)
 
 
     @commands.command(name = "delsetup",
